@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="my-4">Task Details</h1>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ task.Title }}</h5>
+                <p class="card-text">{{ task.Description }}</p>
+                <p class="card-text"><small class="text-muted">Created at: {{ task.createdAt|date('Y-m-d H:i:s') }}</small></p>
+                <a href="{{ path('task_index') }}" class="btn btn-primary">Retour vers la liste</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

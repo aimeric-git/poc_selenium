@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}To-Do List{% endblock %}
+
+{% block body %}
+
+<div>
+    <h1 class="text-center">Tasks </h1>
+    <a href="{{ path('task_new') }}" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Créer une nouvelle tâche</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Titre</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ task.title }}</td>
+                    <td>
+                        <a href="{{ path('task_edit', {'id': task.id}) }}" class="btn btn-primary">Editer</a>
+                        <a href="{{ path('task_delete', {'id': task.id}) }}" class="btn btn-danger">Supprimer</a>
+                        <a href="{{ path('task_show', {'id': task.id}) }}" class="btn btn-info">Voir détails</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
