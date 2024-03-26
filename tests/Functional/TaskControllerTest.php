@@ -24,7 +24,7 @@ class TaskControllerTest extends WebTestCase
         $driver->findElement(WebDriverBy::id('new_task_form_description'))->sendKeys('Description de la nouvelle tâche');
 
         // Soumettre le formulaire
-        $driver->findElement(WebDriverBy::id('new_task_form_submit'))->click();
+        $driver->findElement(WebDriverBy::id('btn_form_new'))->click();
 
         // Vérifier si la redirection a eu lieu
         $this->assertEquals('http://localhost:8000/task', $driver->getCurrentURL());
