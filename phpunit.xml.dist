@@ -19,7 +19,7 @@
 
     <testsuites>
         <testsuite name="Project Test Suite">
-            <directory>tests</directory>
+            <directory>tests/Functional</directory>
         </testsuite>
     </testsuites>
 
@@ -34,5 +34,11 @@
     </listeners>
 
     <extensions>
+        <arguments>
+                <string>selenium_host</string>
+                <string>http://localhost:4444/wd/hub</string>
+                <string>browser</string>
+                <string>chrome</string>
+        </arguments>
     </extensions>
 </phpunit>

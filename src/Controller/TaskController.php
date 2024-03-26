@@ -81,7 +81,9 @@ class TaskController extends AbstractController
     public function show($id): Response
     {
         $task = $this->em->getRepository(Task::class)->findOneBy(['id' => $id]);
-        return $this->render('task/show.html.twig', ['task' => $task]);
+        return $this->render('task/show.html.twig', [
+            'task' => $task
+        ]);
     }
 
 }
