@@ -5,6 +5,7 @@ namespace App\Tests\Functional;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\WebDriverBy;
+use Facebook\WebDriver\WebDriverExpectedCondition;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class TaskControllerTest extends WebTestCase
@@ -20,16 +21,39 @@ class TaskControllerTest extends WebTestCase
         $driver->get('http://localhost:8000/task/new');
 
         // Remplir le formulaire
-        $driver->findElement(WebDriverBy::id('new_task_form_title'))->sendKeys('Nouvelle tâche');
-        $driver->findElement(WebDriverBy::id('new_task_form_description'))->sendKeys('Description de la nouvelle tâche');
+        $driver->findElement(WebDriverBy::id('new_task_form_title'))->sendKeys('New task 11');
+        $driver->findElement(WebDriverBy::id('new_task_form_description'))->sendKeys('New Description 11');
 
         // Soumettre le formulaire
         $driver->findElement(WebDriverBy::id('btn_form_new'))->click();
 
         // Vérifier si la redirection a eu lieu
-        $this->assertEquals('http://localhost:8000/task', $driver->getCurrentURL());
+        $this->assertEquals('http://localhost:8000', $driver->getCurrentURL());
 
         // Fermer le navigateur
+        $driver->quit();
+    }
+
+    public function testEditTaskForm()
+    {
+        $host = 'http://localhost:4444/wd/hub'; 
+        $browser = DesiredCapabilities::firefox(); 
+
+        $driver = RemoteWebDriver::create($host, $browser);
+
+        
+        $id = 4; 
+        $driver->get('http://localhost:8000/task/edit/' . $id);
+
+        $driver->findElement(WebDriverBy::id('new_task_form_title'))->clear();
+        $driver->findElement(WebDriverBy::id('new_task_form_title'))->sendKeys('Titre modifié');
+        $driver->findElement(WebDriverBy::id('new_task_form_description'))->clear();
+        $driver->findElement(WebDriverBy::id('new_task_form_description'))->sendKeys('Description modifiée');
+
+        $driver->findElement(WebDriverBy::id('btn_form_edit'))->click();
+
+        $this->assertEquals('http://localhost:8000', $driver->getCurrentURL());
+
         $driver->quit();
     }
 }
