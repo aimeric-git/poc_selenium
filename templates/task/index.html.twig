@@ -21,8 +21,8 @@
                     <td>{{ task.title }}</td>
                     <td>
                         <a href="{{ path('task_edit', {'id': task.id}) }}" class="btn btn-primary">Editer</a>
-                        <a href="{{ path('task_delete', {'id': task.id}) }}" class="btn btn-danger">Supprimer</a>
-                        <a href="{{ path('task_show', {'id': task.id}) }}" class="btn btn-info">Voir détails</a>
+                        <a href="{{ path('task_delete', {'id': task.id}) }}" class="btn btn-danger" id="btn_suppr_task">Supprimer</a>
+                        <a href="{{ path('task_show', {'id': task.id}) }}" class="btn btn-info" id="btn_show_task">Voir détails</a>
                     </td>
                 </tr>
             {% endfor %}

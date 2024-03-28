@@ -28,7 +28,7 @@ class TaskControllerTest extends WebTestCase
         $driver->findElement(WebDriverBy::id('btn_form_new'))->click();
 
         // Vérifier si la redirection a eu lieu
-        $this->assertEquals('http://localhost:8000', $driver->getCurrentURL());
+        $this->assertEquals('http://localhost:8000/', $driver->getCurrentURL());
 
         // Fermer le navigateur
         $driver->quit();
@@ -52,8 +52,42 @@ class TaskControllerTest extends WebTestCase
 
         $driver->findElement(WebDriverBy::id('btn_form_edit'))->click();
 
-        $this->assertEquals('http://localhost:8000', $driver->getCurrentURL());
+        $this->assertEquals('http://localhost:8000/', $driver->getCurrentURL());
 
+        $driver->quit();
+    }
+
+    public function testDeleteTask()
+    {
+        $host = 'http://localhost:4444/wd/hub';
+        $browser = DesiredCapabilities::firefox();
+        
+        $driver = RemoteWebDriver::create($host, $browser);
+        
+        $driver->get('http://localhost:8000/');
+        
+        $lastTask = $driver->findElement(WebDriverBy::cssSelector('.table tbody tr:last-child'));
+        $deleteButton = $lastTask->findElement(WebDriverBy::id('btn_suppr_task'));
+        $deleteButton->click();
+        
+        $this->assertEquals('http://localhost:8000/', $driver->getCurrentURL());
+        $driver->quit();
+    }
+
+    public function testShowTask()
+    {
+        $host = 'http://localhost:4444/wd/hub';
+        $browser = DesiredCapabilities::firefox();
+        
+        $driver = RemoteWebDriver::create($host, $browser);
+        
+        $driver->get('http://localhost:8000/');
+        
+        $lastTask = $driver->findElement(WebDriverBy::cssSelector('.table tbody tr:last-child'));
+        $showButton = $lastTask->findElement(WebDriverBy::id('btn_show_task'));  
+        $showButton->click();
+
+        // $this->assertEquals('http://localhost:8000/', $driver->getCurrentURL());
         $driver->quit();
     }
 }
