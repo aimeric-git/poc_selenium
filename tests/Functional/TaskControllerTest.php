@@ -46,9 +46,9 @@ class TaskControllerTest extends WebTestCase
         $driver->get('http://localhost:8000/task/edit/' . $id);
 
         $driver->findElement(WebDriverBy::id('new_task_form_title'))->clear();
-        $driver->findElement(WebDriverBy::id('new_task_form_title'))->sendKeys('Titre modifié');
+        $driver->findElement(WebDriverBy::id('new_task_form_title'))->sendKeys('Titre modifié 3');
         $driver->findElement(WebDriverBy::id('new_task_form_description'))->clear();
-        $driver->findElement(WebDriverBy::id('new_task_form_description'))->sendKeys('Description modifiée');
+        $driver->findElement(WebDriverBy::id('new_task_form_description'))->sendKeys('Description modifiée 3');
 
         $driver->findElement(WebDriverBy::id('btn_form_edit'))->click();
 
@@ -88,6 +88,7 @@ class TaskControllerTest extends WebTestCase
         $showButton->click();
 
         // $this->assertEquals('http://localhost:8000/', $driver->getCurrentURL());
+        $this->assertNotEquals('http://localhost:8000/', $driver->getCurrentURL());
         $driver->quit();
     }
 }
