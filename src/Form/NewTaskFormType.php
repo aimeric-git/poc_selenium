@@ -17,11 +17,11 @@ class NewTaskFormType extends AbstractType
         $builder
             ->add('title', TextType::class, [
                 'label' => 'Title',
-                'attr' => ['class' => 'form-control'],
+                'attr' => ['class' => 'form-control', 'id' => 'new_task_form_title'],
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description',
-                'attr' => ['class' => 'form-control'],
+                'attr' => ['class' => 'form-control', 'id' => 'new_task_form_description'],
             ])
         ;
     }

@@ -36,6 +36,7 @@ class TaskController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $this->em->persist($task);
             $this->em->flush();
+            $this->addFlash('notice', 'Création réussie');
 
             return $this->redirectToRoute('task_index');
         }
@@ -56,6 +57,7 @@ class TaskController extends AbstractController
             $task->setTitle($form->getData()->getTitle());
             $task->setDescription($form->getData()->getDescription());
             $this->em->flush();
+            $this->addFlash('notice', 'Modification avec succès');
 
             return $this->redirectToRoute('task_index');
         }
@@ -72,6 +74,9 @@ class TaskController extends AbstractController
         if($task){
             $this->em->remove($task);
             $this->em->flush();
+            $this->addFlash('notice', 'Suppression avec succès');
+        }else{
+            $this->addFlash('error', 'La tache n\' existe pas');
         }
 
         return $this->redirectToRoute('task_index');
@@ -81,7 +86,9 @@ class TaskController extends AbstractController
     public function show($id): Response
     {
         $task = $this->em->getRepository(Task::class)->findOneBy(['id' => $id]);
-        return $this->render('task/show.html.twig', ['task' => $task]);
+        return $this->render('task/show.html.twig', [
+            'task' => $task
+        ]);
     }
 
 }
